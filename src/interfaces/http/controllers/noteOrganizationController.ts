@@ -6,15 +6,14 @@ export class NoteOrganizationController {
 
   async organizeFile(req: Request, res: Response): Promise<void> {
     try {
-      const { filePath } = req.body;
-
-      if (!filePath) {
-        res.status(400).json({ error: 'File path is required' });
+      if (!req.files || (Array.isArray(req.files) && req.files.length === 0)) {
+        res.status(400).json({ error: 'No files provided' });
         return;
       }
 
-      await this.noteOrganizationService.organizeFile(filePath);
-      res.status(200).json({ message: 'File organized successfully' });
+      const files = Array.isArray(req.files) ? req.files : [req.files];
+      await this.noteOrganizationService.organizeFiles(files as Express.Multer.File[]);
+      res.status(200).json({ message: 'Files organized successfully' });
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }

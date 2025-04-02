@@ -31,7 +31,7 @@ app.use(express.json());
 
 // Routes
 app.post('/upload', upload.array('files'), (req, res) => fileController.uploadFiles(req, res));
-app.post('/organize', (req, res) => noteOrganizationController.organizeFile(req, res));
+app.post('/organize', upload.array('files'), (req, res) => noteOrganizationController.organizeFile(req, res));
 
 // Start server
 app.listen(port, () => {
