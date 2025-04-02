@@ -1,6 +1,6 @@
 # Better Notes
 
-A Node.js application built with hexagonal architecture that handles multiple file uploads.
+A Node.js application built with hexagonal architecture that handles multiple file uploads and organizes notes using the PARA method with LLM assistance.
 
 ## Project Structure
 
@@ -17,6 +17,8 @@ src/
 ## Features
 
 - Multiple file upload endpoint
+- Note organization using PARA method
+- LLM-powered note categorization
 - Hexagonal architecture implementation
 - TypeScript support
 
@@ -24,6 +26,7 @@ src/
 
 - Node.js (v14 or higher)
 - npm
+- OpenAI API key
 
 ## Installation
 
@@ -36,6 +39,12 @@ cd better-notes
 2. Install dependencies:
 ```bash
 npm install
+```
+
+3. Create a `.env` file in the root directory with your OpenAI API key:
+```
+OPENAI_API_KEY=your_api_key_here
+PORT=3000
 ```
 
 ## Development
@@ -75,6 +84,40 @@ Upload multiple files.
   ]
 }
 ```
+
+### POST /organize
+
+Organize a note using the PARA method.
+
+**Request:**
+- Method: POST
+- Content-Type: application/json
+- Body: 
+```json
+{
+  "filePath": "/path/to/note.txt"
+}
+```
+
+**Response:**
+```json
+{
+  "message": "File organized successfully",
+  "category": {
+    "name": "Projects",
+    "description": "Short-term efforts with clear goals and deadlines"
+  },
+  "confidence": 0.85,
+  "reasoning": "This note contains specific project tasks with deadlines..."
+}
+```
+
+## PARA Method Categories
+
+- **Projects**: Short-term efforts with clear goals and deadlines
+- **Areas**: Long-term responsibilities and ongoing interests
+- **Resources**: Topics or themes that may be useful in the future
+- **Archives**: Inactive items that may be useful later
 
 ## License
 
