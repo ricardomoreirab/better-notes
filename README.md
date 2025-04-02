@@ -1,6 +1,6 @@
 # Better Notes
 
-A Node.js application built with hexagonal architecture that handles ZIP file uploads.
+A Node.js application built with hexagonal architecture that handles multiple file uploads.
 
 ## Project Structure
 
@@ -16,8 +16,7 @@ src/
 
 ## Features
 
-- ZIP file upload endpoint
-- File validation
+- Multiple file upload endpoint
 - Hexagonal architecture implementation
 - TypeScript support
 
@@ -30,7 +29,7 @@ src/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/better-notes.git
+git clone https://github.com/ricardomoreirab/better-notes.git
 cd better-notes
 ```
 
@@ -58,19 +57,22 @@ npm start
 
 ### POST /upload
 
-Upload a ZIP file.
+Upload multiple files.
 
 **Request:**
 - Method: POST
 - Content-Type: multipart/form-data
 - Body: 
-  - file: ZIP file
+  - files: Array of files
 
 **Response:**
 ```json
 {
-  "message": "File uploaded successfully",
-  "filePath": "/path/to/saved/file.zip"
+  "message": "Files uploaded successfully",
+  "filePaths": [
+    "/path/to/saved/file1.txt",
+    "/path/to/saved/file2.txt"
+  ]
 }
 ```
 

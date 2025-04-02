@@ -12,9 +12,14 @@ export class FileSystemAdapter implements FileRepository {
     }
   }
 
-  async saveFile(file: Express.Multer.File): Promise<string> {
-    const filePath = path.join(this.uploadDir, file.originalname);
-    await fs.promises.writeFile(filePath, file.buffer);
-    return filePath;
+  async saveFiles(files: Express.Multer.File[]): Promise<string[]> {
+    const savedPaths = await Promise.all(
+      files.map(async (file) => {
+        const filePath = path.join(this.uploadDir, file.originalname);
+        await fs.promises.writeFile(filePath, file.buffer);
+        return filePath;
+      })
+    );
+    return savedPaths;
   }
 } 

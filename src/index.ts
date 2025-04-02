@@ -16,7 +16,7 @@ const fileService = new FileService(fileRepository);
 const fileController = new FileController(fileService);
 
 // Routes
-app.post('/upload', upload.single('file'), (req, res) => fileController.uploadFile(req, res));
+app.post('/upload', upload.array('files'), (req, res) => fileController.uploadFiles(req, res));
 
 // Start server
 app.listen(port, () => {

@@ -1,3 +1,3 @@
 export interface FileRepository {
-  saveFile(file: Express.Multer.File): Promise<string>;
+  saveFiles(files: Express.Multer.File[]): Promise<string[]>;
 } 
